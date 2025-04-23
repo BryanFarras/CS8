@@ -1,4 +1,4 @@
-import LogoBase from './assets/logoBase.png';
+import LogoBase from './assets/LogoBase.png';
 
 export default function NavBar() {
     const scrollToSection = (event, id) => {
