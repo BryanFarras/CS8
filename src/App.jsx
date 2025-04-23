@@ -18,7 +18,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-gray-100 text-gray-800">
       <NavBar />
 
-      <main className="container mx-auto px-4 py-8 pt-20 w-full ">
+      <main className="container mx-auto px-3 py-8 pt-20 w-full ">
         <div className="flex flex-wrap justify-center gap-5 w-full">
 
           <section className="flex-1 min-w-0">
