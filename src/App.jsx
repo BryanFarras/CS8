@@ -21,7 +21,6 @@ export default function HomePage() {
       <main className="container mx-auto px-4 py-8 pt-20 w-full ">
         <div className="flex flex-wrap justify-center gap-5 w-full">
 
-          {/* Bagian utama berita */}
           <section className="flex-1 min-w-0">
             <div className="flex justify-between items-center mb-4 flex-wrap gap-2">
               <h2 className="text-2xl font-bold">COMING IN HOT - Steve</h2>
@@ -96,36 +95,54 @@ export default function HomePage() {
             </div>
           </section>
 
-          {/* Iklan */}
           <aside className="w-full lg:w-72">
             <Iklan />
           </aside>
         </div>
 
-        {/* Bagian Berita Lainnya dengan scroll horizontal */}
         <section className="mt-12">
           <h2 className="text-xl font-semibold mb-4">Berita Lainnya</h2>
-          <div className="flex space-x-4 overflow-x-auto pb-4">
-            {news.slice(0, 6).map((item, idx) => (
+          <div className="flex flex-nowrap space-x-4 overflow-x-auto pb-4">
+            {news.slice(0, 6).map((item, index) => (
               <article
-                key={idx}
-                className="min-w-[280px] bg-white rounded-xl shadow-md flex-shrink-0"
+                key={index}
+                className={`min-w-[280px] bg-white rounded-2xl shadow-md overflow-hidden transition-shadow duration-300 transform ${
+                  isListView ? "flex" : ""
+                } ${
+                  hoveredIndex === index ? "shadow-xl scale-105 z-10" : "hover:shadow-xl"
+                }`}
+                style={{
+                  transitionProperty: "box-shadow, transform",
+                  position: hoveredIndex === index ? "relative" : "static",
+                }}
+                onMouseEnter={() => setHoveredIndex(null)}
               >
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-40 object-cover rounded-t-xl"
+                  className={`${
+                    isListView
+                      ? "w-1/3 h-auto object-cover"
+                      : "w-full h-32 object-cover"
+                  }`}
                 />
-                <div className="p-4">
-                  <h3 className="font-bold text-lg" title={item.title}>
-                    {truncateText(item.title, 50)}
-                  </h3>
-                  <p className="text-sm mt-2 text-gray-600" title={item.summary}>
-                    {truncateText(item.summary, 80)}
-                  </p>
+                <div className="p-3 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-base font-bold" title={item.title}>
+                      {truncateText(item.title, 60)}
+                    </h3>
+                    <p className="text-xs mt-1 text-gray-600" title={item.summary}>
+                      {truncateText(item.summary, 100)}
+                    </p>
+                  </div>
                   <button
-                    className="mt-3 bg-black text-white px-3 py-2 rounded hover:bg-color_hover2 transition"
+                    className="mt-3 self-start bg-black text-white px-3 py-1.5 rounded hover:bg-color_hover2 transition"
                     onClick={() => alert(`Baca selengkapnya: ${item.title}`)}
+                    onMouseEnter={(e) => {
+                      e.stopPropagation();
+                      setHoveredIndex(index);
+                    }}
+                    onMouseLeave={() => setHoveredIndex(null)}
                   >
                     Baca Selengkapnya
                   </button>
@@ -134,6 +151,7 @@ export default function HomePage() {
             ))}
           </div>
         </section>
+
       </main>
 
       <footer className="bottom-0 left-0 w-full z-50 bg-color_logo1 text-black py-2 shadow-md text-center font-semibold text-white text-center">
