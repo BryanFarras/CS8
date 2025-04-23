@@ -154,7 +154,7 @@ export default function HomePage() {
 
       </main>
 
-      <footer className="bottom-0 left-0 w-full z-50 bg-color_logo1 text-black py-2 shadow-md text-center font-semibold text-white text-center">
+      <footer className="w-full bottom-0 left-0 w-full z-50 bg-color_logo1 text-black py-2 shadow-md text-center font-semibold text-white text-center">
         <p>&copy; 2025 Liputan6 nya Bryan Farras anjoy. All rights reserved.</p>
       </footer>
     </div>
